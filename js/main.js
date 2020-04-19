@@ -41,18 +41,18 @@ window.onload = function () {
         SCENE.forEach(subject => subject.points.forEach(point => graph3D.zoom(delta, point)));
     }
 
-    // function mousemove(event) {
-    //     if (canRotate) {
-    //         if (event.movementX) {
-    //             const alpha = canvas.sx(event.movementX) / WINDOW.CAMERA.z;
-    //             SCENE.forEach(subject => subject.points.forEach(point => graph3D.rotateOy(alpha, point)));
-    //         }
-    //         if (event.movementY) {
-    //             const alpha = canvas.sy(event.movementY) / -WINDOW.CAMERA.z;
-    //             SCENE.forEach(subject => subject.points.forEach(point => graph3D.rotateOx(alpha, point)));
-    //         }
-    //     }
-    // }
+    function mousemove(event) {
+        if (canRotate) {
+            if (event.movementX) {
+                const alpha = canvas.sx(event.movementX) / WINDOW.CAMERA.z;
+                SCENE.forEach(subject => subject.points.forEach(point => graph3D.rotateOy(alpha, point)));
+            }
+            if (event.movementY) {
+                const alpha = canvas.sy(event.movementY) / -WINDOW.CAMERA.z;
+                SCENE.forEach(subject => subject.points.forEach(point => graph3D.rotateOx(alpha, point)));
+            }
+        }
+    }
 
     function mouseup() {
         canRotate = false;
