@@ -69,11 +69,11 @@ window.onload = function () {
     function move(direction) {
         if (direction === 'up' || direction === 'down') {
             const delta = (direction === 'up') ? 0.1 : -0.1;
-            SCENE.forEach(subject => subject.points.forEach(point => graph3D.moveOy(delta, point)));
+            SCENE.forEach(subject => subject.points.forEach(point => graph3D.moveOx(delta, point)));
         }
         if (direction === 'left' || direction === 'right') {
             const delta = (direction === 'right') ? 0.1 : -0.1;
-            SCENE.forEach(subject => subject.points.forEach(point => graph3D.moveOx(delta, point)));
+            SCENE.forEach(subject => subject.points.forEach(point => graph3D.moveOy(delta, point)));
         }
     }
 
