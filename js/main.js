@@ -35,7 +35,7 @@ window.onload = function () {
         polygon: false
     }
 
-    // about callbacks
+    // about callback
     function wheel(event) {
         const delta = (event.wheelDelta > 0) ? ZOOM_IN : ZOOM_OUT;
         SCENE.forEach(subject => subject.points.forEach(point => graph3D.zoom(delta, point)));
