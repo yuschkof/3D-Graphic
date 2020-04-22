@@ -1,4 +1,4 @@
-Surfaces.prototype.sphere = ( pointCount = 10, ringCount = 10, x = 10, y = 0, z = 0, R = 0) => {
+Surfaces.prototype.sphere = ( pointCount = 20, ringCount = 10, x = 0, y = 0, z = 0, R = 15) => {
     let x0 = x;
     let y0 = y;
     let z0 = z;

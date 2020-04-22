@@ -45,14 +45,14 @@ window.onload = function () {
         }
     });
 
-    const SCENE = [sur.sphere()]; // сцена
-    const LIGHT = new Light(-10, 2, -10, 2000); //источник света
+    const SCENE = [sur.sphere(40, 40)]; // сцена
+    const LIGHT = new Light(-20, 2, -20, 200); //источник света
 
     let canRotate = false;
     let canPrint = {
         point: false,
         edges: false,
-        polygon: false
+        polygon: true
     }
 
     // about callback
@@ -111,9 +111,9 @@ window.onload = function () {
 
     function printSubject(subject) {
         if (canPrint.polygons) {
-            graph3D.calcDistance(subject, WINDOW.CAMERA, "distance");
-            subject.polygons.sort((a, b) => b.distance - a.distance);
-            graph3D.calcDistance(subject, LIGHT, 'lumen');
+            graph3D.calcDistance(subject, WINDOW.CAMERA, "distance"); // 
+            subject.polygons.sort((a, b) => b.distance - a.distance); // отрисовать полигоны
+            graph3D.calcDistance(subject, LIGHT, 'lumen'); // рассчитать дистанция полигон до источник света
             for (let i = 0; i < subject.polygons.length; i++) {
                 const polygon = subject.polygons[i];
                 const point1 = {
@@ -132,7 +132,12 @@ window.onload = function () {
                     x: graph3D.xs(subject.points[polygon.points[3]]),
                     y: graph3D.ys(subject.points[polygon.points[3]])
                 };
-                canvas.polygon([point1, point2, point3, point4], polygon.color);
+                let { r, g, b} = polygon.color;
+                const lumen = graph3D.calcIllummination(polygon.lumen, LIGHT.lumen)
+                r = Math.round(r * lumen);
+                g = Math.round(g * lumen);
+                b = Math.round(b * lumen);
+                canvas.polygon([point1, point2, point3, point4], polygon.rgbToHex(r, g, b));
             }
         };
 

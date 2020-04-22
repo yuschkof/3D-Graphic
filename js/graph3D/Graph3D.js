@@ -62,4 +62,9 @@ class Graph3D {
                           (endPoint.z - z) * (endPoint.z - z));
         }   
     }
+
+    calcIllummination(distance, lumen) {
+        let illum = (distance) ? lumen / (distance * distance) : 1;
+        return (illum > 1) ? 1 : illum;
+    }
 }
