@@ -45,7 +45,8 @@ window.onload = function () {
         }
     });
 
-    const SCENE = [sur.bublik()]; // сцена
+    const SCENE = [sur.sphere()]; // сцена
+    const LIGHT = new Light(-10, 2, -10, 2000); //источник света
 
     let canRotate = false;
     let canPrint = {
@@ -110,8 +111,9 @@ window.onload = function () {
 
     function printSubject(subject) {
         if (canPrint.polygons) {
-            graph3D.calcDistance(subject, WINDOW.CAMERA);
+            graph3D.calcDistance(subject, WINDOW.CAMERA, "distance");
             subject.polygons.sort((a, b) => b.distance - a.distance);
+            graph3D.calcDistance(subject, LIGHT, 'lumen');
             for (let i = 0; i < subject.polygons.length; i++) {
                 const polygon = subject.polygons[i];
                 const point1 = {

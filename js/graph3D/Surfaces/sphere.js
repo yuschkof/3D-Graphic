@@ -1,4 +1,4 @@
-Surfaces.prototype.sphere = ( pointCount = 10, ringCount = 10, x = 10, y = 0, z = 0) => {
+Surfaces.prototype.sphere = ( pointCount = 10, ringCount = 10, x = 10, y = 0, z = 0, R = 0) => {
     let x0 = x;
     let y0 = y;
     let z0 = z;
@@ -19,7 +19,7 @@ Surfaces.prototype.sphere = ( pointCount = 10, ringCount = 10, x = 10, y = 0, z 
     //set edges
     for (let i = 0; i < points.length; i++) {
         if (i % pointCount === 0 && i !== 0) {
-            edges.push(new edges(i, i + 1));
+            edges.push(new Edge(i, i + 1));
         } else {
             if (i + 1 < points.length && (i + 1) % pointCount !== 0){
                 edges.push(new Edge(i, i + 1));
