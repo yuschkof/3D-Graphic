@@ -30,6 +30,15 @@ class Math3D {
     // перемножение матрицы преобразования на точку
     // m = [x, y, z, 1]
     // T = [[],[],[],[]] по 4 элемента
+
+    calcVector(a, b) {
+        return {
+            x: b.x - a.x,
+            y: b.y - a.y,
+            z: b.z - a.z
+        }
+    }
+
     multMatrix(T, m) {
         const c = [0, 0, 0, 0];
         const rows = T.length;
