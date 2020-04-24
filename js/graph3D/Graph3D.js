@@ -1,5 +1,7 @@
 class Graph3D {
-    constructor({ WINDOW }) {
+    constructor({
+        WINDOW
+    }) {
         this.WINDOW = WINDOW;
         this.math = new Math3D();
     }
@@ -19,16 +21,16 @@ class Graph3D {
     }
 
     // масштабирование точки
-    zoom(delta, point) { 
-        this.math.zoom(delta, point); 
+    zoom(delta, point) {
+        this.math.zoom(delta, point);
     }
 
     // перенос точки вдоль оси Ox
-    moveOx(delta, point) { 
+    moveOx(delta, point) {
         return this.math.move(delta, 0, 0, point);
     }
     // перенос точки вдоль оси Oy
-    moveOy(delta, point) { 
+    moveOy(delta, point) {
         return this.math.move(delta, 0, 0, point);
     }
 
@@ -40,7 +42,7 @@ class Graph3D {
         return this.math.rotateOy(alpha, point);
     }
     rotateOz(alpha, point) {
-        return this.math.rotateOz(alpha,point);
+        return this.math.rotateOz(alpha, point);
     }
 
     calcDistance(subject, endPoint, name) {
@@ -72,9 +74,22 @@ class Graph3D {
     }
 
     calcGorner(subject, endPoint) {
-
+        const perpendicular = Math.cos(Math.PI / 2);
         const viewVector = this.math.calcVector(endPoint, new Point(0, 0, 0))
+        for (let i = 0; i < subject.polygons.length; i++) {
+            const points = subject.polygons[i].points;
+            const vector1 = this.math.calcVector(
+                subject.points[points[0]],
+                subject.points[points[1]]
+            );
+            const vector2 = this.math.calcVector(
+                subject.points[points[0]],
+                subject.points[points[2]]
+            );
+            const vector3 = this.math.vectorProd(vector1, vector2)
+            subject.polygons[i].visible = this.math.calcGorner(viewVector, vector3) <= perpendicular;
 
-        console.log(viewVector)
+            
+        }
     }
 }
