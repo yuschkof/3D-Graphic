@@ -27,7 +27,7 @@ class Graph3D {
 
     // перенос точки вдоль оси Ox
     moveOx(delta, point) {
-        return this.math.move(delta, 0, 0, point);
+        return this.math.move(0, delta, 0, point);
     }
     // перенос точки вдоль оси Oy
     moveOy(delta, point) {
