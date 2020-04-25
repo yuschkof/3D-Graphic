@@ -45,16 +45,16 @@ window.onload = function () {
         }
     });
 
-    const SCENE = [sur.sphere(40, 40)]; // сцена
-    const LIGHT = new Light(-20, 2, -20, 200); //источник света
+    const SCENE = [sur.hyperbolicParaboloid()]; // сцена
+    const LIGHT = new Light(-20, 2, -20, 5000); //источник света
 
-    let canRotate = false;
+    let canRotate = false; 
     let canPrint = {
         point: false,
         edges: false,
         polygon: true
     }
-
+    
     // about callback
     function wheel(event) {
         const delta = (event.wheelDelta > 0) ? ZOOM_IN : ZOOM_OUT;
