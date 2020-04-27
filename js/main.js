@@ -46,7 +46,7 @@ window.onload = function () {
     });
 
     const SCENE = [sur.hyperbolicParaboloid()]; // сцена
-    const LIGHT = new Light(-20, 2, -20, 5000); //источник света
+    const LIGHT = new Light(-20, 2, -20, 400); //источник света
 
     let canRotate = false; 
     let canPrint = {
@@ -112,7 +112,7 @@ window.onload = function () {
     function printSubject(subject) {
         if (canPrint.polygons) { //нарисовать полигоны
             //отсечь невидимые грани
-            graph3D.calcGorner(subject, WINDOW.CAMERA)
+            // graph3D.calcGorner(subject, WINDOW.CAMERA)
 
             //алгоритм художника
             graph3D.calcDistance(subject, WINDOW.CAMERA, "distance"); // 

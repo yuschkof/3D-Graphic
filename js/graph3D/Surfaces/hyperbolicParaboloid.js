@@ -1,4 +1,4 @@
-Surfaces.prototype.hyperbolicParaboloid = (count = 20) => {
+Surfaces.prototype.hyperbolicParaboloid = ( count = 20 ) => {
     const points = [];
     const edges = [];
     const polygons = [];
@@ -14,12 +14,19 @@ Surfaces.prototype.hyperbolicParaboloid = (count = 20) => {
         }
     };
 
+
     // провести ребра
     for (let i = 0; i < points.length; i++) {
         if (i + 1 < points.length && (i + 1) % count !== 0) {
             edges.push(new Edge(i, i + 1));
         }
-        if 
+        if (i + count < points.length) {
+            edges.push(new Edge(i, i + count));
+        }
+        //нарисовать полигоны
+        if (i + 1 + count < points.length && (i + 1) % count !== 0) {
+            polygons.push(new Polygon([i, i + 1, i + 1 + count, i + count]));
+        }
     }
 
     return new Subject(points, edges, polygons);
