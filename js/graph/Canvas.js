@@ -38,7 +38,7 @@ class Canvas {
     }
 
     clear() {
-        this.context.fillStyle = '#eeeeee';
+        this.context.fillStyle = '#808080';
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
