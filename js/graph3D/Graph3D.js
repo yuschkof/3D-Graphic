@@ -21,28 +21,33 @@ class Graph3D {
     }
 
     // масштабирование точки
-    zoom(delta, point) {
-        this.math.zoom(delta, point);
+    zoomMatrix(delta) {
+        this.math.zoomMatrix(delta);
+        this.math.transformMatrix([this.math.matrix.zoom]);
     }
 
-    // перенос точки вдоль оси Ox
-    moveOx(delta, point) {
-        return this.math.move(0, delta, 0, point);
-    }
-    // перенос точки вдоль оси Oy
-    moveOy(delta, point) {
-        return this.math.move(delta, 0, 0, point);
+    moveMatrix(sx, sy, sz) {
+        this.math.moveMatrix(sx, sy, sz);
+        this.math.transformMatrix([this.math.matrix.move]);
     }
 
-    // повороты по осям
-    rotateOx(alpha, point) {
-        return this.math.rotateOx(alpha, point);
+    rotateOxMatrix(alpha) {
+        this.math.rotateOxMatrix(alpha);
+        this.math.transformMatrix([this.math.matrix.rotateOx]);
     }
-    rotateOy(alpha, point) {
-        return this.math.rotateOy(alpha, point);
+
+    rotateOyMatrix(alpha) {
+        this.math.rotateOyMatrix(alpha);
+        this.math.transformMatrix([this.math.matrix.rotateOy]);
     }
-    rotateOz(alpha, point) {
-        return this.math.rotateOz(alpha, point);
+
+    rotateOzMatrix(alpha) {
+        this.math.rotateOzMatrix(alpha);
+        this.math.transformMatrix([this.math.matrix.rotateOz]);
+    }
+
+    transform(point) {
+        this.math.transform(point);
     }
 
     calcDistance(subject, endPoint, name) {
