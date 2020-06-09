@@ -47,8 +47,8 @@ window.onload = function () {
 
     // сцена
     const SCENE = [
-        sur.sphera(40, 8, { x0: 0, y0: 0, z0: 0, }, "#ffff00", { rotateOz: new Point }),
-        sur.sphera(20, 4, { x0: -9, y0: 0, z0: -9, }, "#ff0100", {rotateOy: new Point }),
+        sur.sphera(20, 8, { x0: 0, y0: 0, z0: 0, }, "#ffff00", { rotateOz: new Point }),
+        sur.sphera(20, 4, { x0: -9, y0: 0, z0: -9, }, "#ff0100", {rotateOy: new Point(-9, 0, -9) }),
         // sur.sphera(),
     ]; 
 
@@ -213,6 +213,7 @@ window.onload = function () {
         printAllPolygons();
         SCENE.forEach(subject => printSubject(subject));
         canvas.text(WINDOW.LEFT, WINDOW.BOTTOM, 'FPS: ' + FPSout);
+        canvas.render();
 
     }
 
@@ -221,26 +222,18 @@ window.onload = function () {
         SCENE.forEach(subject => {
             if (subject.animation) {
                 for (let key in subject.animation) {
-                    const { x, y, z } = subject.animation[key];
-                    const xn = WINDOW.CENTER.x - x;
-                    const yn = WINDOW.CENTER.y - y;
-                    const zn = WINDOW.CENTER.z - z; 
-                    //переместить центр объект в центр координат
-                    graph3D.moveMatrix(xn, yn, zn);
-                    subject.points.forEach(point => graph3D.transform(point))
-                    //повращать объект 
-                    const alpha = Math.PI / 180; 
-                    graph3D[`${key}Matrix`](alpha)
-                    subject.points.forEach(point => graph3D.transform(point))
-                    //переместить центр объекта после вращения обратно
-                    graph3D.moveMatrix(-xn, -yn, -zn);
-                    subject.points.forEach(point => graph3D.transform(point))
+                        const {x, y, z} = subject.animation[key];
+                        const xn = WINDOW.CENTER.x - x;
+                        const yn = WINDOW.CENTER.y - y;
+                        const zn = WINDOW.CENTER.z - z;
+                        const alpha = Math.PI / 180;
+                        graph3D.animateMatrix(xn, yn, zn, key, -alpha, -xn, -yn, -zn);
+                        subject.points.forEach(point => graph3D.transform(point));
                 }
             }
             
         });
     }
-
     setInterval(animation, 30)
 
     let FPS = 0;

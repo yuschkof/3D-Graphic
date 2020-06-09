@@ -1,31 +1,6 @@
 class Math3D {
     constructor() {
         this.matrix = {
-            zoom: [[1, 0, 0, 0],
-                   [0, 1, 0, 0],
-                   [0, 0, 1, 0],
-                   [0, 0, 0, 1]],
-            
-            move: [[ 1, 0, 0, 0],
-                   [ 0, 1, 0, 0],
-                   [ 0, 0, 1, 0],
-                   [ 1, 1, 1, 1]],
-
-            rotateOx: [[1,  0, 0, 0],
-                       [0,  1, 1, 0],
-                       [0, -1, 1, 0],
-                       [0,  0, 0, 1]],
-
-            rotateOy: [[1, 0, -1, 0],
-                       [0, 1,  0, 0],
-                       [1, 0,  1, 0],
-                       [0, 0,  0, 1]],
-
-            rotateOz: [[ 1, 1, 0, 0],
-                       [-1, 1, 0, 0],
-                       [ 0, 0, 1, 0],
-                       [ 0, 0, 0, 1]],
-
             transform: [[1, 0, 0, 0],
                         [0, 1, 0, 0],
                         [0, 0, 1, 0],
@@ -93,38 +68,38 @@ class Math3D {
     }
 
     zoomMatrix(delta) {
-        this.matrix.zoom = [[delta,  0,  0, 0],
-                            [ 0, delta,  0, 0],
-                            [ 0,  0, delta, 0],
-                            [ 0,  0,     0, 1]]; 
+        return [[delta,  0,  0, 0],
+                [ 0, delta,  0, 0],
+                [ 0,  0, delta, 0],
+                [ 0,  0,     0, 1]]; 
     }
 
     moveMatrix(sx, sy, sz) {
-        this.matrix.move = [[ 1,  0,  0, 0],
-                            [ 0,  1,  0, 0],
-                            [ 0,  0,  1, 0],
-                            [sx, sy, sz, 1]];
+        return [[ 1,  0,  0, 0],
+                [ 0,  1,  0, 0],
+                [ 0,  0,  1, 0],
+                [sx, sy, sz, 1]];
     }
 
     rotateOxMatrix(alpha) {
-        this.matrix.rotateOx = [[1, 0, 0, 0],
-                                [0,  Math.cos(alpha), Math.sin(alpha), 0],
-                                [0, -Math.sin(alpha), Math.cos(alpha), 0],
-                                [0, 0, 0, 1]];
+        return [[1, 0, 0, 0],
+                [0,  Math.cos(alpha), Math.sin(alpha), 0],
+                [0, -Math.sin(alpha), Math.cos(alpha), 0],
+                [0, 0, 0, 1]];
     }
 
     rotateOyMatrix(alpha) {
-        this.matrix.rotateOy = [[Math.cos(alpha), 0, -Math.sin(alpha), 0],
-                                [0, 1, 0, 0],
-                                [Math.sin(alpha), 0, Math.cos(alpha), 0],
-                                [0, 0, 0, 1]];
+        return [[Math.cos(alpha), 0, -Math.sin(alpha), 0],
+                [0, 1, 0, 0],
+                [Math.sin(alpha), 0, Math.cos(alpha), 0],
+                [0, 0, 0, 1]];
     }
 
     rotateOzMatrix(alpha) {
-        this.matrix.rotateOz = [[ Math.cos(alpha), Math.sin(alpha), 0, 0],
-                                [-Math.sin(alpha), Math.cos(alpha), 0, 0],
-                                [0, 0, 1, 0],
-                                [0, 0, 0, 1]];
+        return [[ Math.cos(alpha), Math.sin(alpha), 0, 0],
+                [-Math.sin(alpha), Math.cos(alpha), 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1]];
     }
 
     //заполнить общую матриксу преобразования

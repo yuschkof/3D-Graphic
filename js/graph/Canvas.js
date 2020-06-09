@@ -9,6 +9,14 @@ class Canvas {
         this.context = this.canvas.getContext('2d');
         this.canvas.width  = width;
         this.canvas.height = height;
+
+        //виртуальный канвас 
+        this.canvasV = document.createElement('canvas');
+        this.contextV = this.canvasV.getContext('2d');
+        this.canvasV.width  = width;
+        this.canvasV.height = height;
+
+
         this.WINDOW = WINDOW;
         this.PI2 = 2 * Math.PI;
         // callbacks
@@ -38,42 +46,45 @@ class Canvas {
     }
 
     clear() {
-        this.context.fillStyle = '#808080';
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.contextV.fillStyle = '#483D8B';
+        this.contextV.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     line(x1, y1, x2, y2, color = '#0f0', width = 2) {
-        this.context.beginPath();
-        this.context.strokeStyle = color;
-        this.context.lineWidth = width;
-        this.context.moveTo(this.xs(x1), this.ys(y1));
-        this.context.lineTo(this.xs(x2), this.ys(y2));
-        this.context.stroke();
+        this.contextV.beginPath();
+        this.contextV.strokeStyle = color;
+        this.contextV.lineWidth = width;
+        this.contextV.moveTo(this.xs(x1), this.ys(y1));
+        this.contextV.lineTo(this.xs(x2), this.ys(y2));
+        this.contextV.stroke();
     }
 
     point(x, y, color = '#f00', size = 2) {
-        this.context.beginPath();
-        this.context.strokeStyle = color;
-        this.context.arc(this.xs(x), this.ys(y), size, 0, this.PI2);
-        this.context.stroke();
+        this.contextV.beginPath();
+        this.contextV.strokeStyle = color;
+        this.contextV.arc(this.xs(x), this.ys(y), size, 0, this.PI2);
+        this.contextV.stroke();
     }
     
     text(x, y, text, font = '15px bold Arial', color = '#000') {
-        this.context.fillStyle = color;
-        this.context.font = font;
-        this.context.fillText(text, this.xs(x), this.ys(y));
+        this.contextV.fillStyle = color;
+        this.contextV.font = font;
+        this.contextV.fillText(text, this.xs(x), this.ys(y));
     }
 
     polygon(points, color = '#008800BB') {
-        this.context.fillStyle = color;
-        this.context.fillStroke = color;
-        this.context.beginPath();
-        this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
+        this.contextV.fillStyle = color;
+        this.contextV.fillStroke = color;
+        this.contextV.beginPath();
+        this.contextV.moveTo(this.xs(points[0].x), this.ys(points[0].y));
         for (let i = 1; i < points.length; i++) {
-            this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y));
+            this.contextV.lineTo(this.xs(points[i].x), this.ys(points[i].y));
         }
-        this.context.closePath();
-        // this.context.stroke();
-        this.context.fill();
+        this.contextV.closePath();
+        this.contextV.fill();
+    }
+
+    render() {
+        this.context.drawImage(this.canvasV, 0, 0);
     }
 }

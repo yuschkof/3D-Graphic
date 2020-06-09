@@ -22,28 +22,31 @@ class Graph3D {
 
     // масштабирование точки
     zoomMatrix(delta) {
-        this.math.zoomMatrix(delta);
-        this.math.transformMatrix([this.math.matrix.zoom]);
+        this.math.transformMatrix([this.math.zoomMatrix(delta)]);
     }
 
     moveMatrix(sx, sy, sz) {
-        this.math.moveMatrix(sx, sy, sz);
-        this.math.transformMatrix([this.math.matrix.move]);
+        this.math.transformMatrix([this.math.moveMatrix(sx, sy, sz)]);
     }
 
     rotateOxMatrix(alpha) {
-        this.math.rotateOxMatrix(alpha);
-        this.math.transformMatrix([this.math.matrix.rotateOx]);
+        this.math.transformMatrix([this.math.rotateOxMatrix(alpha)]);
     }
 
     rotateOyMatrix(alpha) {
-        this.math.rotateOyMatrix(alpha);
-        this.math.transformMatrix([this.math.matrix.rotateOy]);
+        this.math.transformMatrix([this.math.rotateOyMatrix(alpha)]);
     }
 
     rotateOzMatrix(alpha) {
-        this.math.rotateOzMatrix(alpha);
-        this.math.transformMatrix([this.math.matrix.rotateOz]);
+        this.math.transformMatrix([this.math.rotateOzMatrix(alpha)]);
+    }
+
+    animateMatrix(x1, y1, z1, key, alpha, x2, y2, z2) {
+        this.math.transformMatrix([
+            this.math.moveMatrix(x1, y1, z1),
+            this.math[`${key}Matrix`](alpha),
+            this.math.moveMatrix(x2, y2, z2),
+        ]);
     }
 
     transform(point) {
